@@ -1,43 +1,40 @@
-<div class="row">
-	<div class="col-md-1">排名</div>
-	<div class="col-md-2">可选</div>
-	<div class="col-md-2">武将</div>
-	<div class="col-md-2">获胜</div>
-	<div class="col-md-2">失败</div>
-	<div class="col-md-1">出场</div>
-	<div class="col-md-2">胜率</div>
+<div class="table-responsive">
+	<table class="table">
+		<tr>
+			<th>排名</th>
+			<th>必选</th>
+			<th>武将</th>
+			<th colspan="3">获胜</th>
+			<th colspan="3">失败</th>
+			<th>出场</th>
+			<th>胜率</th>
+			<g:each in="${it }" var="wuJiang" status="i">
+				<tr>
+					<td>
+						${i+1 }
+					</td>
+					<td><g:checkBox name="wuJiang.required"
+							checked="${wuJiang.required }" value="true" /></td>
+					<td>
+						${wuJiang.name }
+					</td>
+					<td>
+						${wuJiang.win }
+					</td>
+					<td><g:link action="addWin" id="${wuJiang.id }"><span class="glyphicon glyphicon-plus"></span></g:link></td>
+					<td><g:link action="minusWin" id="${wuJiang.id }"><span class="glyphicon glyphicon-minus"></span></g:link></td>
+					<td>
+						${wuJiang.lost }
+					</td>
+					<td><g:link action="addLost" id="${wuJiang.id }"><span class="glyphicon glyphicon-plus"></span></g:link></td>
+					<td><g:link action="minusLost" id="${wuJiang.id }"><span class="glyphicon glyphicon-minus"></span></g:link></td>
+					<td>
+						${wuJiang.appearance }
+					</td>
+					<td>
+						${wuJiang.winningPercentage }
+					</td>
+				</tr>
+			</g:each>
+	</table>
 </div>
-<g:each in="${it }" var="wuJiang" status="i">
-	<div class="row">
-		<div class="col-md-1">
-			${i+1 }
-		</div>
-		<div class="col-md-2">
-			<g:checkBox name="wuJiang.required" checked="${wuJiang.required }"
-				value="true" />
-		</div>
-		<div class="col-md-2">
-			${wuJiang.name }
-		</div>
-		<div class="col-md-1">
-			${wuJiang.win }
-		</div>
-		<div class="col-md-1">
-			<g:link action="addWin" id="${wuJiang.id }">+</g:link>
-			<g:link action="minusWin" id="${wuJiang.id }">-</g:link>
-		</div>
-		<div class="col-md-1">
-			${wuJiang.lost }
-		</div>
-		<div class="col-md-1">
-			<g:link action="addLost" id="${wuJiang.id }">+</g:link>
-			<g:link action="minusLost" id="${wuJiang.id }">-</g:link>
-		</div>
-		<div class="col-md-1">
-			${wuJiang.appearance }
-		</div>
-		<div class="col-md-2">
-			${wuJiang.winningPercentage }
-		</div>
-	</div>
-</g:each>
