@@ -60,7 +60,7 @@ grails.project.dependency.resolution = {
         // plugins for the compile step
         compile ":scaffolding:2.0.3"
         compile ':cache:1.1.2'
-		compile ":resources:1.2.8"
+//		compile ":resources:1.2.8"
 //		compile ":lesscss-resources:1.3.3"
 //		compile ":font-awesome-resources:4.0.3.1"
 
@@ -76,11 +76,11 @@ grails.project.dependency.resolution = {
         //runtime ":yui-minify-resources:0.1.5"
 
         // An alternative to the default resources plugin is the asset-pipeline plugin
-//        compile ":asset-pipeline:1.9.3"
+        compile ":asset-pipeline:1.9.3"
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.5.5"
-//        compile ":less-asset-pipeline:1.9.0"
+        compile ":less-asset-pipeline:1.9.0"
         //compile ":coffee-asset-pipeline:1.5.0"
         //compile ":handlebars-asset-pipeline:1.3.0.1"
     }

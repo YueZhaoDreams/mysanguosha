@@ -32,7 +32,7 @@
 						${wuJiang.appearance }
 					</td>
 					<td>
-						${wuJiang.winningPercentage }
+						<g:formatNumber number="${wuJiang.winningPercentage }" format="#0.00"/>
 					</td>
 				</tr>
 			</g:each>

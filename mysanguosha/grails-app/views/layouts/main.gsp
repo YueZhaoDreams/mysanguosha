@@ -14,15 +14,14 @@
 		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 		<g:javascript library="application"/>	
-		<r:require modules="bootstrap"/>
+		<asset:stylesheet src="application.css"/>
 		<g:layoutHead/>
-		<r:layoutResources />
 	</head>
 	<body>
 		
 		<g:layoutBody/>
+		<asset:javascript src="application.js"/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
-		<r:layoutResources />
 	</body>
 </html>
