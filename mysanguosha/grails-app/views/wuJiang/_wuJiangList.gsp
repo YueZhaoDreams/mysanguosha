@@ -4,6 +4,7 @@
 			<th>排名</th>
 			<th>必选</th>
 			<th>武将</th>
+			<g:sortableColumn property="shiLi" title="势力" />
 			<th colspan="3">获胜</th>
 			<th colspan="3">失败</th>
 			<th>出场</th>
@@ -19,6 +20,9 @@
 						${wuJiang.name }
 					</td>
 					<td>
+						${wuJiang.shiLi.name }
+					</td>
+					<td>
 						${wuJiang.win }
 					</td>
 					<td><g:link action="addWin" id="${wuJiang.id }"><span class="glyphicon glyphicon-plus"></span></g:link></td>
@@ -32,7 +36,7 @@
 						${wuJiang.appearance }
 					</td>
 					<td>
-						<g:formatNumber number="${wuJiang.winningPercentage }" format="#0.00"/>
+						<g:formatNumber number="${wuJiang.winningPercentage }" format="#0.00%"/>
 					</td>
 				</tr>
 			</g:each>

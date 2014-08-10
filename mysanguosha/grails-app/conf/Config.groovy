@@ -37,6 +37,7 @@ grails.mime.types = [ // the first one is the default format
 // What URL patterns should be processed by the resources plugin
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
 grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/plugins/**']
+grails.resources.mappers.cssrewriter.enabled = false
 
 // Legacy setting for codec used to encode data with ${}
 grails.views.default.codec = "html"
@@ -125,3 +126,5 @@ grails.plugins.twitterbootstrap.defaultBundle = 'bundle_bootstrap'
 grails.assets.less.compile = 'less4j'
 grails.assets.plugin."twitter-bootstrap".excludes = ["**/*.less"]
 grails.assets.plugin."twitter-bootstrap".includes = ["bootstrap.less"]
+grails.assets.plugin."font-awesome-resources".excludes	["**/*.less"]
+grails.assets.plugin."font-awesome-resources".includes	["font-awesome.less"]

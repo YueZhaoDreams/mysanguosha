@@ -11,10 +11,15 @@
 			<div class="row">
 				<div class="col-md-2">
 					<button type="button" class="btn btn-default">
-						<g:remoteLink controller="simulator" action="index" update="result">Simulate</g:remoteLink>
+						
+						<g:remoteLink controller="simulator" action="index"
+							update="result">Simulate</g:remoteLink>
 					</button>
 				</div>
 				<div class="col-md-10" id="result"></div>
+				<div class="col-md-1">
+					<i class="icon-user"></i>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
