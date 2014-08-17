@@ -89,7 +89,7 @@ class SimulatorService {
 		def notRequiredBestWuJiangNames=getNotRequiredNames(bestList)
 		println "------------------------------"
 		println winningPercentage+" "+notRequiredBestWuJiangNames
-		return notRequiredBestWuJiangNames
+		return [wuJiangNames:notRequiredBestWuJiangNames,winningPercentage:winningPercentage]
 	}
 	private makeList(wuJiangs){
 		def list=new ArrayList()

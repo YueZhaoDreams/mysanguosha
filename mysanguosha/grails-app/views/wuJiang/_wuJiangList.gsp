@@ -15,7 +15,8 @@
 						${i+1 }
 					</td>
 					<td><g:checkBox name="wuJiang.required"
-							checked="${wuJiang.required }" value="true" /></td>
+							checked="${wuJiang.required }" value="true"
+							onclick="${remoteFunction(action:'changeRequired',controller:'wuJiang', id:wuJiang.id ) }" /></td>
 					<td>
 						${wuJiang.name }
 					</td>
@@ -25,19 +26,26 @@
 					<td>
 						${wuJiang.win }
 					</td>
-					<td><g:link action="addWin" id="${wuJiang.id }"><span class="glyphicon glyphicon-plus"></span></g:link></td>
-					<td><g:link action="minusWin" id="${wuJiang.id }"><span class="glyphicon glyphicon-minus"></span></g:link></td>
+					<td><g:link action="addWin" id="${wuJiang.id }">
+							<span class="glyphicon glyphicon-plus"></span>
+						</g:link></td>
+					<td><g:link action="minusWin" id="${wuJiang.id }">
+							<span class="glyphicon glyphicon-minus"></span>
+						</g:link></td>
 					<td>
 						${wuJiang.lost }
 					</td>
-					<td><g:link action="addLost" id="${wuJiang.id }"><span class="glyphicon glyphicon-plus"></span></g:link></td>
-					<td><g:link action="minusLost" id="${wuJiang.id }"><span class="glyphicon glyphicon-minus"></span></g:link></td>
+					<td><g:link action="addLost" id="${wuJiang.id }">
+							<span class="glyphicon glyphicon-plus"></span>
+						</g:link></td>
+					<td><g:link action="minusLost" id="${wuJiang.id }">
+							<span class="glyphicon glyphicon-minus"></span>
+						</g:link></td>
 					<td>
 						${wuJiang.appearance }
 					</td>
-					<td>
-						<g:formatNumber number="${wuJiang.winningPercentage }" format="#0.00%"/>
-					</td>
+					<td><g:formatNumber number="${wuJiang.winningPercentage }"
+							format="#0.00%" /></td>
 				</tr>
 			</g:each>
 	</table>

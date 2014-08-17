@@ -28,4 +28,10 @@ class WuJiangController {
 		wuJiang.save()
 		redirect(action:"index")
 	}
+	def changeRequired(){
+		def wuJiang=WuJiang.get(params.id)
+		wuJiang.required=!wuJiang.required
+		wuJiang.save()
+		println wuJiang.name+" has change its required to "+wuJiang.required
+	}
 }
