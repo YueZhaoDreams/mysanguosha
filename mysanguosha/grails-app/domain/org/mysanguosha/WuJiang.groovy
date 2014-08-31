@@ -8,8 +8,10 @@ class WuJiang {
 	boolean required
 	double winningPercentage
 	int appearance
+	WuJiangGroup wuJiangGroup
+	WuJiangGuoGroup wuJiangGuoGroup
     static constraints = {
-		
+		wuJiangGroup nullable:true
     }
 	def beforeInsert() {
 		double winningP
