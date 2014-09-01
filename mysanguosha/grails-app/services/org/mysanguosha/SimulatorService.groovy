@@ -21,10 +21,11 @@ class SimulatorService {
 	def calculate() {
 		def winningPercentage=0d
 
-		def weiShiLi=ShiLi.findByName("Wei")
-		def shuShiLi=ShiLi.findByName("Shu")
-		def wuShiLi=ShiLi.findByName("Wu")
-		def qunShiLi=ShiLi.findByName("Qun")
+		def weiShiLi=ShiLi.findByCode("Wei")
+		println weiShiLi
+		def shuShiLi=ShiLi.findByCode("Shu")
+		def wuShiLi=ShiLi.findByCode("Wu")
+		def qunShiLi=ShiLi.findByCode("Qun")
 
 		def weiRequired=WuJiang.findAllByShiLiAndRequired(weiShiLi,true)
 		def shuRequired=WuJiang.findAllByShiLiAndRequired(shuShiLi,true)
@@ -35,16 +36,6 @@ class SimulatorService {
 		def sortedShuNotRequired=WuJiang.findAllByShiLiAndRequiredAndWinGreaterThan(shuShiLi,false,0,[sort:"winningPercentage",order:"desc"])
 		def sortedWuNotRequired=WuJiang.findAllByShiLiAndRequiredAndWinGreaterThan(wuShiLi,false,0,[sort:"winningPercentage",order:"desc"])
 		def sortedQunNotRequired=WuJiang.findAllByShiLiAndRequiredAndWinGreaterThan(qunShiLi,false,0,[sort:"winningPercentage",order:"desc"])
-
-		//		def weiNotRequiredList=getCombinationList(weiNotRequired)
-		//		def shuNotRequiredList=getCombinationList(shuNotRequired)
-		//		def wuNotRequiredList=getCombinationList(wuNotRequired)
-		//		def qunNotRequiredList=getCombinationList(qunNotRequired)
-
-		//		weiNotRequiredList.add(new ArrayList())
-		//		shuNotRequiredList.add(new ArrayList())
-		//		wuNotRequiredList.add(new ArrayList())
-		//		qunNotRequiredList.add(new ArrayList())
 
 		def weiNotRequiredList=makeList(sortedWeiNotRequired)
 		def shuNotRequiredList=makeList(sortedShuNotRequired)
@@ -86,10 +77,10 @@ class SimulatorService {
 		}
 		println count
 		def bestList=bestWei+bestShu+bestWu+bestQun
-		def notRequiredBestWuJiangNames=getNotRequiredNames(bestList)
+		def openNotBiaoFengNames=getOpenNotBiaoFengNames(bestList)
 		println "------------------------------"
-		println winningPercentage+" "+notRequiredBestWuJiangNames
-		return [wuJiangNames:notRequiredBestWuJiangNames,winningPercentage:winningPercentage]
+		println winningPercentage+" "+openNotBiaoFengNames
+		return [wuJiangNames:openNotBiaoFengNames,winningPercentage:winningPercentage]
 	}
 	private makeList(wuJiangs){
 		def list=new ArrayList()
@@ -112,6 +103,15 @@ class SimulatorService {
 			}
 		}
 		return notRequiredWuJiangNames
+	}
+	def getOpenNotBiaoFengNames(wuJiangs){
+		def openNotBiaoFengNames=new ArrayList()
+		for(item in wuJiangs){
+			if(item.open==true&&(item.wuJiangGroup==null||(item.wuJiangGroup.code!="Biao"&&item.wuJiangGroup.code!="Feng"))){
+				openNotBiaoFengNames.add(item.name)
+			}
+		}
+		return openNotBiaoFengNames
 	}
 	def getWinningPercentage(wei,shu,wu,qun){
 		def winningPercentage=(CombinatoricsUtils.binomialCoefficientDouble(wei.size(),2)*shiLiAvg(wei)+CombinatoricsUtils.binomialCoefficientDouble(shu.size(),2)*shiLiAvg(shu)+CombinatoricsUtils.binomialCoefficientDouble(wu.size(),2)*shiLiAvg(wu)+CombinatoricsUtils.binomialCoefficientDouble(qun.size(),2)*shiLiAvg(qun))/(CombinatoricsUtils.binomialCoefficientDouble(wei.size(),2)+CombinatoricsUtils.binomialCoefficientDouble(shu.size(),2)+CombinatoricsUtils.binomialCoefficientDouble(wu.size(),2)+CombinatoricsUtils.binomialCoefficientDouble(qun.size(),2))
