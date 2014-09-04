@@ -1,28 +1,13 @@
 package org.mysanguosha
 
-import grails.transaction.Transactional
 import org.apache.commons.math3.util.CombinatoricsUtils
 
-@Transactional
 class SimulatorService {
-
-	def calculate2(){
-		def c = WuJiang.createCriteria()
-		def results = c.list {
-			and {
-				between("balance", 500, 1000)
-				eq("branch", "London")
-			}
-			maxResults(10)
-			order("holderLastName", "desc")
-		}
-	}
 
 	def calculate() {
 		def winningPercentage=0d
 
 		def weiShiLi=ShiLi.findByCode("Wei")
-		println weiShiLi
 		def shuShiLi=ShiLi.findByCode("Shu")
 		def wuShiLi=ShiLi.findByCode("Wu")
 		def qunShiLi=ShiLi.findByCode("Qun")

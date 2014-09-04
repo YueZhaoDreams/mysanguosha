@@ -17,44 +17,35 @@
 				</div>
 				<div class="col-md-10" id="result"></div>
 			</div>
-			<div class="row">
-				<div class="col-md-3">
-					<g:radio name="shiLi" value="0" />
-					魏
+			<g:form>
+				<div class="row">
+					<div class="col-md-2">
+						<g:actionSubmit name="winBtn" value="Win" class="btn form-control"
+							action="addWin" />
+					</div>
+					<div class="col-md-2">
+						<g:actionSubmit name="lostBtn" value="Lost"
+							class="btn form-control" action="addLost" />
+					</div>
 				</div>
-				<div class="col-md-3">
-					<g:radio name="shiLi" value="1" />
-					蜀
-				</div>
-				<div class="col-md-3">
-					<g:radio name="shiLi" value="2" />
-					吴
-				</div>
-				<div class="col-md-3">
-					<g:radio name="shiLi" value="3" />
-					群
-				</div>
-			</div>
-			<div class="row" id="pairList">
-				<div class="col-md-6">
-					<g:each
-						in="${org.mysanguosha.WuJiang.findAllByShiLi(org.mysanguosha.ShiLi.findByName('Wei'),[sort:'winningPercentage',order:'desc']) }">
-						<div class="row">
-							<g:radio name="zhuJiang" value="${it.id }" />
-							${it.name}
+				<g:each in="${org.mysanguosha.ShiLi.list() }" var="item">
+					<div class="row">
+						<div class="col-md-12">
+							${item.name}
 						</div>
-					</g:each>
-				</div>
-				<div class="col-md-6">
-					<g:each
-						in="${org.mysanguosha.WuJiang.findAllByShiLi(org.mysanguosha.ShiLi.findByName('Wei'),[sort:'winningPercentage',order:'desc']) }">
-						<div class="row">
-							<g:radio name="fuJiang" value="${it.id }" />
-							${it.name}
-						</div>
-					</g:each>
-				</div>
-			</div>
+					</div>
+					<div class="row">
+						<g:each in="${org.mysanguosha.WuJiang.findAllByShiLi(item) }">
+							<div class="col-md-2">
+								<g:checkBox name="wuJiang" value="${it.id}"
+									id="wuJiang${it.id }" checked="false" class="wuJiang" />
+								${it.name}
+							</div>
+						</g:each>
+					</div>
+					<div class="row">&nbsp;</div>
+				</g:each>
+			</g:form>
 		</div>
 	</div>
 	<g:javascript>
