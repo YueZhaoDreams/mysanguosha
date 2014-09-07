@@ -5,23 +5,21 @@ class RecordController {
     def index() { 
 	}
 	def addWin(){
-		for(item in params.wuJiang){
-			def wuJiang=WuJiang.get(item)
-			println wuJiang.win
-			wuJiang.win++
-			println wuJiang.win
-			wuJiang.save()
-		}
+		def zhuJiang=WuJiang.get(params.zhuJiang)
+		def fuJiang=WuJiang.get(params.fuJiang)
+		zhuJiang.win++
+		fuJiang.win++
+		zhuJiang.save()
+		fuJiang.save()
 		redirect(controller:"wuJiang")
 	}
 	def addLost(){
-		for(item in params.wuJiang){
-			def wuJiang=WuJiang.get(item)
-			println wuJiang.lost
-			wuJiang.lost++
-			println wuJiang.win
-			wuJiang.save()
-		}
+		def zhuJiang=WuJiang.get(params.zhuJiang)
+		def fuJiang=WuJiang.get(params.fuJiang)
+		zhuJiang.lost++
+		fuJiang.lost++
+		zhuJiang.save()
+		fuJiang.save()
 		redirect(controller:"wuJiang")
 	}
 }
