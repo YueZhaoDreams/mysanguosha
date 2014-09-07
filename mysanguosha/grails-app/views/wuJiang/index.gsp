@@ -43,6 +43,7 @@
 	</div>
 	<g:javascript>
 	activeLink("wuJiangLink");
+	${remoteFunction(action: 'index',controller:'simulator',update:'result')}
 	</g:javascript>
 </body>
 </html>
