@@ -14,7 +14,7 @@ class RecordController {
 		zhuJiang.save()
 		fuJiang.save()
 		pair.save()
-		redirect(controller:"wuJiang")
+		render(view:"index",model:[shiLi:zhuJiang.shiLi.code])
 	}
 	def addLost(){
 		def zhuJiang=WuJiang.get(params.zhuJiang)
@@ -26,6 +26,6 @@ class RecordController {
 		zhuJiang.save()
 		fuJiang.save()
 		pair.save()
-		redirect(controller:"wuJiang")
+		render(view:"index",model:[shiLi:zhuJiang.shiLi.code])
 	}
 }

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="layout" content="main" />
-<title>Welcome to Grails</title>
+<title>记录</title>
 <g:javascript library="jquery" plugin="jquery"></g:javascript>
 <asset:javascript src="record.js" />
 </head>
@@ -44,16 +44,44 @@
 									</a>
 								</h4>
 							</div>
-							<div id="collapse${i }" class="panel-collapse collapse ${i==0?"in":"" }">
+							<div id="collapse${i }"
+								class="panel-collapse collapse ${shiLi?(shiLi==item.code?"in":""):(i==0?"in":"") }">
 								<div class="panel-body">
 									<div class="row">
-										<g:each in="${org.mysanguosha.WuJiang.findAllByShiLi(item) }">
-											<div class="col-md-2">
+										<g:each in="${org.mysanguosha.WuJiang.findAllByShiLi(item,[sort:"winningPercentage",order:"desc"]) }">
+											<div class="col-md-3">
 												<div class="checkbox">
 													<label> <input type="checkbox" value="${it.id}"
-														id="wuJiang${it.id }" onchange="pickWuJiang(${it.id });" />
-														<g:hiddenField name="wuJiangName"
-															id="wuJiangName${it.id }" value="${it.name }" /> ${it.name}
+														hidden id="wuJiang${it.id }"
+														onchange="pickWuJiang(${it.id });" />
+														<table>
+															<tr>
+																<td colspan="6">
+																	${it.name}
+																</td>
+															</tr>
+															<tr>
+																<td>胜：</td>
+																<td>
+																	${it.win }
+																</td>
+																<td style="padding-left: 10px;">负：</td>
+																<td>
+																	${it.lost }
+																</td>
+																<td style="padding-left: 10px;">总：</td>
+																<td>
+																	${it.appearance }
+																</td>
+															</tr>
+															<tr>
+																<td colspan="2">胜率：</td>
+																<td colspan="4"><g:formatNumber
+																		number="${it.winningPercentage }" format="##0.##%" /></td>
+															</tr>
+														</table> <g:hiddenField name="wuJiangName"
+															id="wuJiangName${it.id }" value="${it.name }" />
+
 													</label>
 												</div>
 											</div>
