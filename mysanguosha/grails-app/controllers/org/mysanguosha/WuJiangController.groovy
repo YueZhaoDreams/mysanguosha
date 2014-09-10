@@ -1,5 +1,8 @@
 package org.mysanguosha
 
+import grails.plugin.springsecurity.annotation.Secured
+
+@Secured("ROLE_USER")
 class WuJiangController {
 	def index(){
 

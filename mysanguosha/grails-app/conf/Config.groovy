@@ -128,3 +128,19 @@ grails.assets.plugin."twitter-bootstrap".excludes = ["**/*.less"]
 grails.assets.plugin."twitter-bootstrap".includes = ["bootstrap.less"]
 grails.assets.plugin."font-awesome-resources".excludes	["**/*.less"]
 grails.assets.plugin."font-awesome-resources".includes	["font-awesome.less"]
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.mysanguosha.SecUser'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.mysanguosha.SecUserSecRole'
+grails.plugin.springsecurity.authority.className = 'org.mysanguosha.SecRole'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/assets/**':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
+]
+
