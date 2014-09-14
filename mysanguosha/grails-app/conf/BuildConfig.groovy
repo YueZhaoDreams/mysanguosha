@@ -61,6 +61,7 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.0.3"
         compile ':cache:1.1.2'
 		compile ':spring-security-core:2.0-RC4'
+		compile ":quartz:1.0.2"
 //		compile ":resources:1.2.8"
 //		compile ":lesscss-resources:1.3.3"
 //		compile ":font-awesome-resources:4.1.0.1"
