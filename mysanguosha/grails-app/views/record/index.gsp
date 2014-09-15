@@ -11,6 +11,16 @@
 		<div class="container">
 			<g:form>
 				<div class="row">
+					<div class="col-md-2">
+						<button type="button" class="btn btn-default">
+
+							<g:remoteLink controller="simulator" action="index"
+								update="result">Simulate</g:remoteLink>
+						</button>
+					</div>
+					<div class="col-md-10" id="result"></div>
+				</div>
+				<div class="row">
 					<div class="col-md-3 form-group">
 						<label class="col-sm-4" for="zhuJiang">主将：</label>
 						<div class="col-sm-8">
@@ -48,7 +58,8 @@
 								class="panel-collapse collapse ${shiLi?(shiLi==item.code?"in":""):(i==0?"in":"") }">
 								<div class="panel-body">
 									<div class="row">
-										<g:each in="${org.mysanguosha.WuJiang.findAllByShiLi(item,[sort:"winningPercentage",order:"desc"]) }">
+										<g:each
+											in="${org.mysanguosha.WuJiang.findAllByShiLi(item,[sort:"winningPercentage",order:"desc"]) }">
 											<div class="col-md-3">
 												<div class="checkbox">
 													<label> <input type="checkbox" value="${it.id}"
@@ -77,7 +88,8 @@
 															<tr>
 																<td colspan="2">胜率：</td>
 																<td colspan="4"><g:formatNumber
-																		number="${org.mysanguosha.UserWuJiang.findOrSaveByUserAndWuJiang(user,it).winningPercentage }" format="##0.##%" /></td>
+																		number="${org.mysanguosha.UserWuJiang.findOrSaveByUserAndWuJiang(user,it).winningPercentage }"
+																		format="##0.##%" /></td>
 															</tr>
 														</table> <g:hiddenField name="wuJiangName"
 															id="wuJiangName${it.id }" value="${it.name }" />
@@ -98,6 +110,7 @@
 	<g:javascript>
 	activeLink("recordLink");
 	var zhuFuList=[];
+	${remoteFunction(action: 'index',controller:'simulator',update:'result')}
 	</g:javascript>
 </body>
 </html>

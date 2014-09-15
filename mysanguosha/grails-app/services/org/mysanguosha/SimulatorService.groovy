@@ -3,8 +3,10 @@ package org.mysanguosha
 import org.apache.commons.math3.util.CombinatoricsUtils
 
 class SimulatorService {
-
+	def springSecurityService
 	def calculate() {
+		def user=springSecurityService.currentUser
+
 		def winningPercentage=0d
 
 		def weiShiLi=ShiLi.findByCode("Wei")
@@ -12,20 +14,83 @@ class SimulatorService {
 		def wuShiLi=ShiLi.findByCode("Wu")
 		def qunShiLi=ShiLi.findByCode("Qun")
 
-		def weiRequired=WuJiang.findAllByShiLiAndRequired(weiShiLi,true)
-		def shuRequired=WuJiang.findAllByShiLiAndRequired(shuShiLi,true)
-		def wuRequired=WuJiang.findAllByShiLiAndRequired(wuShiLi,true)
-		def qunRequired=WuJiang.findAllByShiLiAndRequired(qunShiLi,true)
+		def weiCriteria = UserWuJiang.createCriteria()
+		def weiRequired = weiCriteria.list{
+			eq "user", user
+			wuJiang{
+				eq "shiLi",weiShiLi
+				eq "required",true
+			}
+		}
+		def shuCriteria = UserWuJiang.createCriteria()
+		def shuRequired = shuCriteria.list{
+			eq "user", user
+			wuJiang{
+				eq "shiLi",shuShiLi
+				eq "required",true
+			}
+		}
+		def wuCriteria = UserWuJiang.createCriteria()
+		def wuRequired = wuCriteria.list{
+			eq "user", user
+			wuJiang{
+				eq "shiLi",wuShiLi
+				eq "required",true
+			}
+		}
+		def qunCriteria = UserWuJiang.createCriteria()
+		def qunRequired = qunCriteria.list{
+			eq "user", user
+			wuJiang{
+				eq "shiLi",qunShiLi
+				eq "required",true
+			}
+		}
 
-		def sortedWeiNotRequired=WuJiang.findAllByShiLiAndRequiredAndWinGreaterThan(weiShiLi,false,0,[sort:"winningPercentage",order:"desc"])
-		def sortedShuNotRequired=WuJiang.findAllByShiLiAndRequiredAndWinGreaterThan(shuShiLi,false,0,[sort:"winningPercentage",order:"desc"])
-		def sortedWuNotRequired=WuJiang.findAllByShiLiAndRequiredAndWinGreaterThan(wuShiLi,false,0,[sort:"winningPercentage",order:"desc"])
-		def sortedQunNotRequired=WuJiang.findAllByShiLiAndRequiredAndWinGreaterThan(qunShiLi,false,0,[sort:"winningPercentage",order:"desc"])
-
-		def weiNotRequiredList=makeList(sortedWeiNotRequired)
-		def shuNotRequiredList=makeList(sortedShuNotRequired)
-		def wuNotRequiredList=makeList(sortedWuNotRequired)
-		def qunNotRequiredList=makeList(sortedQunNotRequired)
+		def weiOpenCriteria = UserWuJiang.createCriteria()
+		def weiOpenUserWuJiangs = weiOpenCriteria.list{
+			eq "user",user
+			eq "open",true
+			order("winningPercentage", "desc")
+			wuJiang{
+				eq "shiLi",weiShiLi
+				eq "required",false
+			}
+		}
+		def shuOpenCriteria = UserWuJiang.createCriteria()
+		def shuOpenUserWuJiangs = shuOpenCriteria.list{
+			eq "user",user
+			eq "open",true
+			order("winningPercentage", "desc")
+			wuJiang{
+				eq "shiLi",shuShiLi
+				eq "required",false
+			}
+		}
+		def wuOpenCriteria = UserWuJiang.createCriteria()
+		def wuOpenUserWuJiangs = wuOpenCriteria.list{
+			eq "user",user
+			eq "open",true
+			order("winningPercentage", "desc")
+			wuJiang{
+				eq "shiLi",wuShiLi
+				eq "required",false
+			}
+		}
+		def qunOpenCriteria = UserWuJiang.createCriteria()
+		def qunOpenUserWuJiangs = qunOpenCriteria.list{
+			eq "user",user
+			eq "open",true
+			order("winningPercentage", "desc")
+			wuJiang{
+				eq "shiLi",qunShiLi
+				eq "required",false
+			}
+		}		
+		def weiNotRequiredList=makeList(weiOpenUserWuJiangs)
+		def shuNotRequiredList=makeList(shuOpenUserWuJiangs)
+		def wuNotRequiredList=makeList(wuOpenUserWuJiangs)
+		def qunNotRequiredList=makeList(qunOpenUserWuJiangs)
 
 		def bestWei
 		def bestShu
@@ -43,7 +108,6 @@ class SimulatorService {
 					for(itemQun in qunNotRequiredList){
 						def qun=qunRequired+itemQun
 						def winningPercentageItem=getWinningPercentage(wei,shu,wu,qun)
-						def netRequiredNames=getNotRequiredNames(wei+shu+wu+qun)
 						if(count%100==0){
 							println count
 						}
@@ -62,10 +126,10 @@ class SimulatorService {
 		}
 		println count
 		def bestList=bestWei+bestShu+bestWu+bestQun
-		def openNotBiaoFengNames=getOpenNotBiaoFengNames(bestList)
+		def notRequiredNames=getNotRequiredNames(bestList)
 		println "------------------------------"
-		println winningPercentage+" "+openNotBiaoFengNames
-		return [wuJiangNames:openNotBiaoFengNames,winningPercentage:winningPercentage]
+		println winningPercentage+" "+notRequiredNames
+		return [wuJiangNames:notRequiredNames,winningPercentage:winningPercentage]
 	}
 	private makeList(wuJiangs){
 		def list=new ArrayList()
@@ -83,20 +147,11 @@ class SimulatorService {
 	def getNotRequiredNames(wuJiangs){
 		def notRequiredWuJiangNames=new ArrayList()
 		for(item in wuJiangs){
-			if(item.required==false){
-				notRequiredWuJiangNames.add(item.name)
+			if(item.wuJiang.required==false){
+				notRequiredWuJiangNames.add(item.wuJiang.name)
 			}
 		}
 		return notRequiredWuJiangNames
-	}
-	def getOpenNotBiaoFengNames(wuJiangs){
-		def openNotBiaoFengNames=new ArrayList()
-		for(item in wuJiangs){
-			if(item.open==true&&(item.wuJiangGroup==null||(item.wuJiangGroup.code!="Biao"&&item.wuJiangGroup.code!="Feng"))){
-				openNotBiaoFengNames.add(item.name)
-			}
-		}
-		return openNotBiaoFengNames
 	}
 	def getWinningPercentage(wei,shu,wu,qun){
 		def winningPercentage=(CombinatoricsUtils.binomialCoefficientDouble(wei.size(),2)*shiLiAvg(wei)+CombinatoricsUtils.binomialCoefficientDouble(shu.size(),2)*shiLiAvg(shu)+CombinatoricsUtils.binomialCoefficientDouble(wu.size(),2)*shiLiAvg(wu)+CombinatoricsUtils.binomialCoefficientDouble(qun.size(),2)*shiLiAvg(qun))/(CombinatoricsUtils.binomialCoefficientDouble(wei.size(),2)+CombinatoricsUtils.binomialCoefficientDouble(shu.size(),2)+CombinatoricsUtils.binomialCoefficientDouble(wu.size(),2)+CombinatoricsUtils.binomialCoefficientDouble(qun.size(),2))

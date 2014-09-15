@@ -10,7 +10,6 @@ class WuJiang {
 	int appearance
 	WuJiangGroup wuJiangGroup
 	WuJiangGuoGroup wuJiangGuoGroup
-	boolean open
     static constraints = {
 		wuJiangGroup nullable:true
     }
