@@ -33,4 +33,7 @@ pickWuJiang = function(id) {
 		$("#fuJiang").val("");
 		$("#fuJiangDiv").text("");
 	}
+	if($("#zhuJiang").val()!=""&&$("#fuJiang").val()!=""){
+		updatePair($("#zhuJiang").val(),$("#fuJiang").val());
+	}
 }

@@ -21,19 +21,21 @@
 					<div class="col-md-10" id="result"></div>
 				</div>
 				<div class="row">
-					<div class="col-md-3 form-group">
-						<label class="col-sm-4" for="zhuJiang">主将：</label>
-						<div class="col-sm-8">
+					<div class="col-md-2 form-group">
+						<label class="col-sm-6" for="zhuJiang">主将：</label>
+						<div class="col-sm-6">
 							<input type="hidden" id="zhuJiang" name="zhuJiang"></input>
 							<div id="zhuJiangDiv"></div>
 						</div>
 					</div>
-					<div class="col-md-3 form-group">
-						<label class="col-sm-4" for="fuJiang">副将：</label>
-						<div class="col-sm-8">
+					<div class="col-md-2 form-group">
+						<label class="col-sm-6" for="fuJiang">副将：</label>
+						<div class="col-sm-6">
 							<input type="hidden" id="fuJiang" name="fuJiang"></input>
 							<div id="fuJiangDiv"></div>
 						</div>
+					</div>
+					<div class="col-md-3" id="pair">
 					</div>
 					<div class="col-md-2">
 						<g:actionSubmit name="winBtn" value="Win" class="btn form-control"
@@ -108,9 +110,12 @@
 		</div>
 	</div>
 	<g:javascript>
-	activeLink("recordLink");
-	var zhuFuList=[];
-	${remoteFunction(action: 'index',controller:'simulator',update:'result')}
+		activeLink("recordLink");
+		var zhuFuList=[];
+		${remoteFunction(action: 'index',controller:'simulator',update:'result')}
+		function updatePair(zhuJiangId, fuJiangId){
+			${remoteFunction(action: 'show', controller:'pair', update:'pair', params: '{zhuJiangId:zhuJiangId,fuJiangId:fuJiangId}') }
+		}
 	</g:javascript>
 </body>
 </html>
