@@ -35,6 +35,8 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li id="recordLink"><g:link controller="record">记录</g:link></li>
+					<li id="wuJiangLink"><g:link controller="wuJiang">武将</g:link></li>
+					<li id="userWuJiangLink"><g:link controller="userWuJiang">我的武将</g:link></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><g:link controller="logout" action="">Logout</g:link></li>
