@@ -34,6 +34,7 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
+					<li id="homeLink"><g:link controller="home">主页</g:link></li>
 					<li id="recordLink"><g:link controller="record">记录</g:link></li>
 					<li id="wuJiangLink"><g:link controller="wuJiang">武将</g:link></li>
 					<li id="userWuJiangLink"><g:link controller="userWuJiang">我的武将</g:link></li>
