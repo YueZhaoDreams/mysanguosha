@@ -65,6 +65,10 @@ grails.project.dependency.resolution = {
 //		compile ":resources:1.2.8"
 //		compile ":lesscss-resources:1.3.3"
 //		compile ":font-awesome-resources:4.1.0.1"
+		compile ":mail:1.0.7"
+		compile ":jquery-ui:1.10.4"
+		compile ":famfamfam:1.0.1"
+		compile ":spring-security-ui:1.0-RC2"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.13" // or ":hibernate4:4.3.5.1"
