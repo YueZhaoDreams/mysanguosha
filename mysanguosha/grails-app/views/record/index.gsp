@@ -85,7 +85,7 @@
 						<div class="col-md-10" id="result"></div>
 					</div>
 					<g:each
-						in="${org.mysanguosha.UserPair.findAllByUser(user,[max:3,sort:"winningPercentage",order:"desc"]) }"
+						in="${org.mysanguosha.Pair.list([max:5,sort:"winningPercentage",order:"desc"]) }"
 						var="it" status="i">
 						<table>
 							<tr>
@@ -93,31 +93,30 @@
 									${i+1 }
 								</td>
 								<td>
-									${it.pair.zhuJiang.name }
+									${it.zhuJiang.name }
 								</td>
 								<td></td>
 								<td>
-									${it.pair.fuJiang.name }
+									${it.fuJiang.name }
 								</td>
 							</tr>
 							<tr>
-								<td>胜：</td>
-								<td>
-									${it.win }
-								</td>
-								<td style="padding-left: 10px;">负：</td>
-								<td>
-									${it.lost }
-								</td>
-								<td style="padding-left: 10px;">总：</td>
-								<td>
-									${it.appearance }
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">胜率：</td>
+								<td colspan="2">平均胜率：</td>
 								<td colspan="4"><g:formatNumber
 										number="${it.winningPercentage }" format="##0.##%" /></td>
+							</tr>
+							<tr>
+								<td>我的胜率：</td>
+								<sec:ifLoggedIn>
+									<td><g:formatNumber
+											number="${org.mysanguosha.UserPair.findOrSaveByUserAndPair(user,it).winningPercentage }"
+											format="##0.##%" /></td>
+									<td>(${org.mysanguosha.UserPair.findOrSaveByUserAndPair(user,it).win }/${org.mysanguosha.UserPair.findOrSaveByUserAndPair(user,it).appearance })
+									</td>
+								</sec:ifLoggedIn>
+								<sec:ifNotLoggedIn>
+									<td colspan="3">注册后输入</td>
+								</sec:ifNotLoggedIn>
 							</tr>
 						</table>
 					</g:each>

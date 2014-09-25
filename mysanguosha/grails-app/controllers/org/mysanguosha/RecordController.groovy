@@ -5,6 +5,7 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured("ROLE_USER")
 class RecordController {
 	def springSecurityService
+	@Secured("permitAll")
     def index() { 
 		def user=springSecurityService.currentUser
 		return [user:user]

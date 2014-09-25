@@ -3,30 +3,31 @@
 		id="wuJiang${it.id }" onchange="pickWuJiang(${it.id });" />
 		<table>
 			<tr>
-				<td colspan="5">
+				<td colspan="3">
 					${it.name}
 				</td>
 			</tr>
 			<tr>
-				<td>胜：</td>
-				<td>
-					${org.mysanguosha.UserWuJiang.findOrSaveByUserAndWuJiang(user,it).win }
-				</td>
-				<td style="padding-left: 10px;">负：</td>
-				<td>
-					${org.mysanguosha.UserWuJiang.findOrSaveByUserAndWuJiang(user,it).lost }
-				</td>
-				<td style="padding-left: 10px;">总：</td>
-				<td>
-					${org.mysanguosha.UserWuJiang.findOrSaveByUserAndWuJiang(user,it).appearance }
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">胜率：</td>
-				<td colspan="4"><g:formatNumber
-						number="${org.mysanguosha.UserWuJiang.findOrSaveByUserAndWuJiang(user,it).winningPercentage }"
+				<td>平均胜率：</td>
+				<td><g:formatNumber number="${it.winningPercentage }"
 						format="##0.##%" /></td>
 			</tr>
+
+			<tr>
+				<td>我的胜率：</td>
+				<sec:ifLoggedIn>
+					<td><g:formatNumber
+							number="${org.mysanguosha.UserWuJiang.findOrSaveByUserAndWuJiang(user,it).winningPercentage }"
+							format="##0.##%" /></td>
+					<td>(${org.mysanguosha.UserWuJiang.findOrSaveByUserAndWuJiang(user,it).win }/${org.mysanguosha.UserWuJiang.findOrSaveByUserAndWuJiang(user,it).appearance })
+					</td>
+				</sec:ifLoggedIn>
+				<sec:ifNotLoggedIn>
+					<td colspan="3">注册后输入</td>
+				</sec:ifNotLoggedIn>
+			</tr>
+
+
 		</table> <g:hiddenField name="wuJiangName" id="wuJiangName${it.id }"
 			value="${it.name }" />
 
