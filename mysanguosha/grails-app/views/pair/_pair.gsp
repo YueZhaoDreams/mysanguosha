@@ -18,4 +18,11 @@
 		<td colspan="4"><g:formatNumber number="${it.winningPercentage }"
 				format="##0.##%" /></td>
 	</tr>
+	<tr>
+		<td><g:actionSubmit name="winBtn" value="Win"
+				class="btn form-control" action="addWin" /></td>
+		<td></td>
+		<td><g:actionSubmit name="lostBtn" value="Lost"
+				class="btn form-control" action="addLost" /></td>
+	</tr>
 </table>

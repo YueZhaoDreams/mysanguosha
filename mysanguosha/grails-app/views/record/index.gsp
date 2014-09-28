@@ -54,72 +54,62 @@
 					</div>
 				</div>
 				<div class="col-md-2">
-					<div class="row">
-						<table>
-							<tr>
-								<td id="zhuJiangDiv"></td>
-								<td><input type="hidden" id="zhuJiang" name="zhuJiang"></input><input
-									type="hidden" id="fuJiang" name="fuJiang"></input></td>
-								<td id="fuJiangDiv"></td>
-							</tr>
-							<tr>
-								<td><g:actionSubmit name="winBtn" value="Win"
-										class="btn form-control" action="addWin" /></td>
-								<td></td>
-								<td><g:actionSubmit name="lostBtn" value="Lost"
-										class="btn form-control" action="addLost" /></td>
-							</tr>
-							<tr>
-								<td id="pair" colspan="3"></td>
-							</tr>
-						</table>
-					</div>
-					<div class="row">
-						<div class="col-md-2">
-							<button type="button" class="btn btn-default">
-
-								<g:remoteLink controller="simulator" action="index"
-									update="result">Simulate</g:remoteLink>
-							</button>
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<table>
+								<tr>
+									<td id="zhuJiangDiv"></td>
+									<td><input type="hidden" id="zhuJiang" name="zhuJiang"></input><input
+										type="hidden" id="fuJiang" name="fuJiang"></input></td>
+									<td id="fuJiangDiv"></td>
+								</tr>
+								<tr>
+									<td id="pair" colspan="3"></td>
+								</tr>
+							</table>
 						</div>
-						<div class="col-md-10" id="result"></div>
 					</div>
-					<g:each
-						in="${org.mysanguosha.Pair.list([max:5,sort:"winningPercentage",order:"desc"]) }"
-						var="it" status="i">
-						<table>
-							<tr>
-								<td>
-									${i+1 }
-								</td>
-								<td>
-									${it.zhuJiang.name }
-								</td>
-								<td></td>
-								<td>
-									${it.fuJiang.name }
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">平均胜率：</td>
-								<td colspan="4"><g:formatNumber
-										number="${it.winningPercentage }" format="##0.##%" /></td>
-							</tr>
-							<tr>
-								<td>我的胜率：</td>
-								<sec:ifLoggedIn>
-									<td><g:formatNumber
-											number="${org.mysanguosha.UserPair.findOrSaveByUserAndPair(user,it).winningPercentage }"
-											format="##0.##%" /></td>
-									<td>(${org.mysanguosha.UserPair.findOrSaveByUserAndPair(user,it).win }/${org.mysanguosha.UserPair.findOrSaveByUserAndPair(user,it).appearance })
-									</td>
-								</sec:ifLoggedIn>
-								<sec:ifNotLoggedIn>
-									<td colspan="3">注册后输入</td>
-								</sec:ifNotLoggedIn>
-							</tr>
-						</table>
-					</g:each>
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="row">
+								<button type="button" class="btn btn-default form-control">
+									<g:remoteLink controller="simulator" action="index"
+										update="result">计算最佳组合</g:remoteLink>
+								</button>
+							</div>
+							<div class="row" id="result"></div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">武将组合 Top5</h3>
+						</div>
+						<div class="panel-body">
+							<g:each
+								in="${org.mysanguosha.Pair.list([max:5,sort:"winningPercentage",order:"desc"]) }"
+								var="it" status="i">
+								<table>
+									<tr>
+										<td>
+											${i+1 }
+										</td>
+										<td>
+											${it.zhuJiang.name }
+										</td>
+										<td></td>
+										<td>
+											${it.fuJiang.name }
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">平均胜率：</td>
+										<td colspan="4"><g:formatNumber
+												number="${it.winningPercentage }" format="##0.##%" /></td>
+									</tr>
+								</table>
+							</g:each>
+						</div>
+					</div>
 				</div>
 			</div>
 		</g:form>
