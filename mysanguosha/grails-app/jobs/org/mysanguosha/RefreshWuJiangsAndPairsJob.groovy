@@ -28,9 +28,9 @@ class RefreshWuJiangsAndPairsJob {
 			def userPairLostSum=UserWuJiang.executeQuery(
 					'select sum(lost) from UserPair u where u.pair=:pair',
 					[pair: item])[0]
-			item.win=userPairWinSum
-			item.lost=userPairLostSum
-			item.save()
+			item?.win=userPairWinSum
+			item?.lost=userPairLostSum
+			item?.save()
 		}
 		print "Job run!"
 	}

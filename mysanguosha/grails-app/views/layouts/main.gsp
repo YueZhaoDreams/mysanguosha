@@ -39,7 +39,13 @@
 					<li id="userWuJiangLink"><g:link controller="userWuJiang">我的武将</g:link></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><g:link controller="logout" action="">Logout</g:link></li>
+					<sec:ifLoggedIn>
+						<li><g:link controller="logout" action="">退出</g:link></li>
+					</sec:ifLoggedIn>
+					<sec:ifNotLoggedIn>
+						<li><a>登录</a></li>
+						<li><a>注册</a></li>
+					</sec:ifNotLoggedIn>
 				</ul>
 			</div>
 		</div>

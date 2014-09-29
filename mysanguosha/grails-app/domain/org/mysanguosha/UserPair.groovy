@@ -8,6 +8,7 @@ class UserPair {
 	double winningPercentage=0d
 	int appearance=0
 	static constraints = {
+		pair unique:'user'
 	}
 	def beforeInsert() {
 		double winningP
