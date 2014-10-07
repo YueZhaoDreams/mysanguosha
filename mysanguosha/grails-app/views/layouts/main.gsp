@@ -43,7 +43,7 @@
 						<li><g:link controller="logout" action="">退出</g:link></li>
 					</sec:ifLoggedIn>
 					<sec:ifNotLoggedIn>
-						<li><a>登录</a></li>
+						<li><g:link controller="login">登录</g:link></li>
 						<li><a>注册</a></li>
 					</sec:ifNotLoggedIn>
 				</ul>
