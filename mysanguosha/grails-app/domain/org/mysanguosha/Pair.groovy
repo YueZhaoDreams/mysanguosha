@@ -5,10 +5,11 @@ class Pair {
 	WuJiang fuJiang
 	int win=0
 	int lost=0
-	double winningPercentage
+	double winningPercentage=0d
 	int appearance
 
 	static constraints = {
+		importFrom WuJiang
 		zhuJiang unique:'fuJiang'
 		fuJiang validator:{ val, obj->
 			if(val.shiLi!=obj.zhuJiang.shiLi){

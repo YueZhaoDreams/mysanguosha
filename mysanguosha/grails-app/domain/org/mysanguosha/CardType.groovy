@@ -5,6 +5,7 @@ class CardType {
 	String description
 
     static constraints = {
+		name unique:true
 		description nullable:true
     }
 }

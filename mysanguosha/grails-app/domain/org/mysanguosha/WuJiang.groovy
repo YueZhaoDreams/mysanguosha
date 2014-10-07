@@ -12,6 +12,10 @@ class WuJiang {
 	WuJiangGuoGroup wuJiangGuoGroup
     static constraints = {
 		wuJiangGroup nullable:true
+		win min:0
+		lost min:0
+		winningPercentage min:0d,max:1d
+		appearance min:0
     }
 	def beforeInsert() {
 		double winningP

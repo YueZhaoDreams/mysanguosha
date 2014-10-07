@@ -10,6 +10,8 @@ class UserWuJiang {
 	int appearance
 	boolean open=0
 	static constraints = {
+		importFrom WuJiang
+		wuJiang unique:'user'
 	}
 	def beforeInsert() {
 		double winningP
