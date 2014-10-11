@@ -1,5 +1,7 @@
 package org.mysanguosha
 
+import java.util.Date;
+
 class UserWuJiang {
 	User user
 	WuJiang wuJiang
@@ -9,6 +11,10 @@ class UserWuJiang {
 	double winningPercentage
 	int appearance
 	boolean open=0
+	boolean recommended=false
+	Date dateCreated
+	Date lastUpdated	
+	
 	static constraints = {
 		importFrom WuJiang
 		wuJiang unique:'user'

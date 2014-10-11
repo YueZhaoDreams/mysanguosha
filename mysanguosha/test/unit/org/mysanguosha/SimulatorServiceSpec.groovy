@@ -15,6 +15,11 @@ class SimulatorServiceSpec extends Specification {
     def cleanup() {
     }
 
-    void "test something"() {
+    void "winningPercentage is less than 1"() {
+		when:
+		def results= service.calculate()
+		
+		then:
+		results.winningPercentage<=1d
     }
 }

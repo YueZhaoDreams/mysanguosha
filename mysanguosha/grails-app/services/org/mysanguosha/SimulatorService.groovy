@@ -129,6 +129,17 @@ class SimulatorService {
 		def notRequiredNames=getNotRequiredNames(bestList)
 		println "------------------------------"
 		println winningPercentage+" "+notRequiredNames
+		def userWuJiangs=UserWuJiang.findAllByUser(user)
+		for(userWJ in userWuJiangs){
+			if(notRequiredNames.contains(userWJ.wuJiang.name)){
+				userWJ.recommended=true
+			}else{
+				userWJ.recommended=false
+			}
+			userWJ.save()
+		}
+		user.lastRecommended=new Date()
+		user.save()
 		return [wuJiangNames:notRequiredNames,winningPercentage:winningPercentage]
 	}
 	private makeList(wuJiangs){

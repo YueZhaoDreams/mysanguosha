@@ -24,7 +24,6 @@
 												</a>
 											</h4>
 										</div>
-
 										<g:each
 											in="${org.mysanguosha.WuJiang.findAllByShiLi(item,[sort:"winningPercentage",order:"desc",max:3]) }"
 											status="j" var="it">
@@ -49,6 +48,15 @@
 										</div>
 									</div>
 								</div>
+								<ul class="list-group">
+									<li class="list-group-item">推荐打开： <g:each var="wuJiang"
+											in="${org.mysanguosha.UserWuJiang.findAllByUser(user) }">
+											<g:if
+												test="${wuJiang.recommended&&wuJiang.wuJiang.shiLi==item }">
+												${wuJiang.wuJiang.name }
+											</g:if>
+										</g:each></li>
+								</ul>
 							</div>
 						</g:each>
 					</div>

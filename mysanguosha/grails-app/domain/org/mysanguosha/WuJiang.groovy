@@ -10,6 +10,10 @@ class WuJiang {
 	int appearance
 	WuJiangGroup wuJiangGroup
 	WuJiangGuoGroup wuJiangGuoGroup
+	boolean recommended=false
+	Date dateCreated
+	Date lastUpdated
+	
     static constraints = {
 		wuJiangGroup nullable:true
 		win min:0
