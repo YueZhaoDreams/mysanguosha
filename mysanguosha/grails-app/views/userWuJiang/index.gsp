@@ -11,8 +11,8 @@
 			<div class="row">
 				<div class="col-md-2">
 					<button type="button" class="btn btn-default">
-						<g:remoteLink controller="simulator" action="index"
-							update="result">Simulate</g:remoteLink>
+						<g:remoteLink controller="recommend" action="index"
+							update="result">Recommend</g:remoteLink>
 					</button>
 				</div>
 				<div class="col-md-10" id="result"></div>
@@ -38,7 +38,7 @@
 	</div>
 	<g:javascript>
 	activeLink("userWuJiangLink");
-	${remoteFunction(action: 'index',controller:'simulator',update:'result')}
+	${remoteFunction(action: 'index',controller:'recommend',update:'result')}
 	</g:javascript>
 </body>
 </html>

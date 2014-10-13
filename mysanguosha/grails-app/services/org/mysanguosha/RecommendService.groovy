@@ -2,7 +2,7 @@ package org.mysanguosha
 
 import org.apache.commons.math3.util.CombinatoricsUtils
 
-class SimulatorService {
+class RecommendService {
 	def springSecurityService
 	def calculate() {
 		def user=springSecurityService.currentUser

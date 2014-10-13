@@ -81,7 +81,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<button type="button" class="btn btn-default form-control">
-									<g:remoteLink controller="simulator" action="index"
+									<g:remoteLink controller="recommend" action="index"
 										update="result">计算最佳组合</g:remoteLink>
 								</button>
 							</div>
