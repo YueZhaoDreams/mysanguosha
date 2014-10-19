@@ -10,7 +10,10 @@ class WuJiang {
 	int appearance
 	WuJiangGroup wuJiangGroup
 	WuJiangGuoGroup wuJiangGuoGroup
-	boolean recommended=false
+	boolean vipRequired=false
+	boolean defaultRequired=false
+	Short yinLiangPrice
+	Short yuanBaoPrice
 	Date dateCreated
 	Date lastUpdated
 	
@@ -20,6 +23,8 @@ class WuJiang {
 		lost min:0
 		winningPercentage min:0d,max:1d
 		appearance min:0
+		yinLiangPrice nullable:true
+		yuanBaoPrice nullable:true
     }
 	def beforeInsert() {
 		double winningP
