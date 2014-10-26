@@ -9,16 +9,6 @@
 	<div class="jumbotron" style="margin-bottom:0px;">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2">
-					<button type="button" class="btn btn-default">
-
-						<g:remoteLink controller="recommend" action="index"
-							update="result">Recommend</g:remoteLink>
-					</button>
-				</div>
-				<div class="col-md-10" id="result"></div>
-			</div>
-			<div class="row">
 				<div class="col-md-6">
 					<g:render template="wuJiangList"
 						bean="${org.mysanguosha.WuJiang.findAllByShiLi(org.mysanguosha.ShiLi.findByName('魏'),[sort:'winningPercentage',order:'desc']) }" />
@@ -42,8 +32,7 @@
 		</div>
 	</div>
 	<g:javascript>
-	activeLink("wuJiangLink");
-	${remoteFunction(action: 'index',controller:'recommend',update:'result')}
+		activeLink("wuJiangLink");
 	</g:javascript>
 </body>
 </html>
