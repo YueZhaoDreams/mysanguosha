@@ -8,6 +8,7 @@
 <body>
 	<div class="jumbotron" style="margin-bottom: 0px;">
 		<div class="container">
+			<g:link controller="userWuJiang" action="download">打印</g:link>
 			<div class="row">
 				<div class="col-md-6">
 					<g:render template="wuJiangList" bean="${wei}" />
